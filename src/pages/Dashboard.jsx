@@ -18,7 +18,7 @@ import useAuthCalls from "../hooks/useAuthCalls";
 const drawerWidth = 200;
 
 function Dashboard(props) {
-const{currentUser,error}=useSelector((state)=>state.auth);
+const{currentUser}=useSelector((state)=>state.auth);
 const {logout}=useAuthCalls();
 
 
