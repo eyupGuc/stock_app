@@ -11,12 +11,17 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuListItemsLists from "../components/MenuListItemsLists";
 import { blueGrey } from "@mui/material/colors";
-
-
+import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import useAuthCalls from "../hooks/useAuthCalls";
 
 const drawerWidth = 200;
 
 function Dashboard(props) {
+const{currentUser,error}=useSelector((state)=>state.auth);
+const {logout}=useAuthCalls();
+
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -58,8 +63,13 @@ function Dashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Stock App
           </Typography>
+          {currentUser && (
+            <Button color="inherit" onClick={() => logout()}>
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Box
