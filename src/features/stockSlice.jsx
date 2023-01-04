@@ -1,37 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const authSlice = createSlice({
-  name: "auth",
+const stockSlice = createSlice({
+  name: "stock",
 
   initialState: {
-    currentUser: null,
+    purchases: null,
+    sales: null,
+    products: null,
+    brands: null,
+    firms: null,
+    categories: null,
     loading: false,
     error: false,
-    isAdmin: false,
-    token: null,
   },
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
       state.error = false;
     },
-    loginSuccess: (state, { payload }) => {
+    getSuccess: (state, { payload: { data, url } }) => {
       state.loading = false;
-      state.currentUser = payload?.user?.username;
-      state.isAdmin = payload?.user?.is_superuser;
-      state.token = payload?.key;
+      state[url] = data;
     },
-    logoutSuccess: (state) => {
-      state.loading = false;
-      state.currentUser = null;
-      state.token = null;
-    },
-    registerSuccess: (state, { payload }) => {
-      state.loading = false;
-      state.currentUser = payload?.username;
-      state.token = payload?.token;
-      state.error = false;
-    },
+
     fetchFail: (state) => {
       state.loading = false;
       state.error = true;
@@ -39,11 +30,5 @@ const authSlice = createSlice({
   },
 });
 
-export const {
-  fetchStart,
-  loginSuccess,
-  logoutSuccess,
-  registerSuccess,
-  fetchFail,
-} = authSlice.actions;
-export default authSlice.reducer;
+export const { fetchStart, getSuccess, fetchFail } = stockSlice.actions;
+export default stockSlice.reducer;
