@@ -5,7 +5,7 @@ import FirmCard from "../components/FirmCard";
 import useStockCalls from "../hooks/useStockCalls";
 
 const Firms = () => {
-  const { getFirms } = useStockCalls();
+  const { getFirms }= useStockCalls();
   const { firms } = useSelector((state) => state.stock);
   // console.log(firms)
 
