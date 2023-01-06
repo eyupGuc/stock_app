@@ -5,6 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { btnHoverStyle } from '../styles/globalStyle';
 
 export default function FirmCard({item}) {
   return (
@@ -23,9 +26,10 @@ export default function FirmCard({item}) {
           {item?.address}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+      <CardActions sx={{display:"flex",justifyContent:"center"}}>
+        <EditIcon sx ={btnHoverStyle}/>
+        <DeleteOutlineIcon sx={btnHoverStyle} />
+       
       </CardActions>
     </Card>
   );
