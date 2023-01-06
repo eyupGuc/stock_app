@@ -1,11 +1,12 @@
-import { axiosWithToken } from "../service/axiosInstance";
+
 import { useDispatch } from "react-redux";
 import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
+import useAxios from "./useAxios";
 
 
 const useStockCalls = () => {
   const dispatch = useDispatch();
- 
+ const {axiosWithToken}=useAxios()
 
   const getStockData = async (url) => {
     dispatch(fetchStart());
