@@ -8,19 +8,23 @@ const Firms = () => {
 
   const getFirms = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}stock/firms`, {
+      const { data } = await axios.get(`${BASE_URL}stock/firms/`, {
         headers: {
           Authorization: `Token ${token}`,
         },
       });
+      console.log(data)
     } catch (e) {
       console.log(e);
     }
+   
   };
 
   useEffect(() => {
     getFirms();
   }, []);
+
+
   return <div>Firms</div>;
 };
 
