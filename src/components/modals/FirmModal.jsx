@@ -4,9 +4,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { modalStyle } from "../../styles/globalStyle";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
-export default function FirmModal({ open, setOpen }) {
+export default function FirmModal({ open, setOpen, info, setInfo }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInfo({ ...info, [name]: value });
+  };
   return (
     <div>
       <Modal
@@ -15,14 +23,19 @@ export default function FirmModal({ open, setOpen }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={modalStyle}>
+        <Box sx={modalStyle} component="form" onSubmit={handleSubmit}>
           <TextField
-            label="Firn name"
+            label="Firm name"
             name="name"
             id="name"
             type="text"
             variant="outlined"
-          ></TextField>
+            value={info?.name}
+            onChange={handleChange}
+          />
+          <Button type="submit" variant="contained">
+            submit firm
+          </Button>
         </Box>
       </Modal>
     </div>
