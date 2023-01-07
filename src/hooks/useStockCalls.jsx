@@ -34,7 +34,25 @@ const useStockCalls = () => {
     }
   };
   const deleteFirm = (id) => deleteStockData("firms", id);
-  return { getFirms, getSales, deleteFirm };
+
+
+//!---------------POST CALLS-----
+const postStockData = async (info,url) => {
+  try {
+    await axiosWithToken.post(`stock/${url}/`,info);
+    toastSuccessNotify(`${url} successfully added`);
+    getStockData(url);
+  } catch (e) {
+    toastErrorNotify(`${url} can not be added `);
+  }
+};
+const postFirm = (info) => postStockData(info,"firms");
+
+
+
+
+
+  return { getFirms, getSales, deleteFirm,postFirm ,postStockData};
 };
 
 export default useStockCalls;
