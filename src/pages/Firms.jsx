@@ -18,7 +18,7 @@ const Firms = () => {
       <Typography variant="h4" color="error" mb={4}>
         Firms
       </Typography>{" "}
-      <Button variant="contained">New Firm</Button>
+      <Button variant="contained" onClick={}>New Firm</Button>
       {firms?.length > 0 && (
         <Grid container justifyContent="center" gap={4}>
           {firms?.map((item) => (

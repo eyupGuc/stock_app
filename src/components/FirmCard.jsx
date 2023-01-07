@@ -15,7 +15,7 @@ export default function FirmCard({ item }) {
   const { deleteFirm } = useStockCalls();
 
   return (
-    <Card
+    <Card elevation={10}
       sx={{
         p: 2,
         maxWidth: "300px",
