@@ -23,7 +23,7 @@ const Firms = () => {
       <Typography variant="h4" color="error" mb={4}>
         Firms
       </Typography>{" "}
-      <Button variant="contained" onClick={() => setOpen(true)}>
+      <Button variant="contained" onClick={() => setOpen(true)} sx={{mb:2}}>
         New Firm
       </Button>
       <FirmModal open={open} setOpen={setOpen} info={info} setInfo={setInfo} />
@@ -31,7 +31,7 @@ const Firms = () => {
         <Grid container justifyContent="center" gap={4}>
           {firms?.map((item) => (
             <Grid item key={item.id}>
-              <FirmCard item={item} />
+              <FirmCard item={item} setInfo={setInfo} setOpen={setOpen}/>
             </Grid>
           ))}
         </Grid>
