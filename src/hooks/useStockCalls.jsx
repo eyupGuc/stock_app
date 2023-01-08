@@ -27,32 +27,41 @@ const useStockCalls = () => {
   const deleteStockData = async (url, id) => {
     try {
       await axiosWithToken.delete(`stock/${url}/${id}/`);
-      toastSuccessNotify(`${url} can not be  deleted`);
+      toastSuccessNotify(`${url} deleted`);
       getStockData(url);
     } catch (e) {
-      toastErrorNotify(`${url} `);
+      toastErrorNotify(`${url}  can not be  deleted`);
     }
   };
   const deleteFirm = (id) => deleteStockData("firms", id);
 
+  //!---------------POST CALLS-----
+  const postStockData = async (info, url) => {
+    try {
+      await axiosWithToken.post(`stock/${url}/`, info);
+      toastSuccessNotify(`${url} successfully added`);
+      getStockData(url);
+    } catch (e) {
+      toastErrorNotify(`${url} can not be added `);
+    }
+  };
+  const postFirm = (info) => postStockData(info, "firms");
 
-//!---------------POST CALLS-----
-const postStockData = async (info,url) => {
-  try {
-    await axiosWithToken.post(`stock/${url}/`,info);
-    toastSuccessNotify(`${url} successfully added`);
-    getStockData(url);
-  } catch (e) {
-    toastErrorNotify(`${url} can not be added `);
-  }
-};
-const postFirm = (info) => postStockData(info,"firms");
+  //!---------------PUT CALLS-----
 
+  const putStockData = async (info, url) => {
+    try {
+      await axiosWithToken.put(`stock/${url}/${info.id}/`, info);
+      toastSuccessNotify(`${url} successfully updated`);
+      getStockData(url);
+    } catch (e) {
+      toastErrorNotify(`${url} can not be updated `);
+    }
+  };
 
+  const putFirm = (info) => putStockData(info, "firms");
 
-
-
-  return { getFirms, getSales, deleteFirm,postFirm ,postStockData};
+  return { getFirms, getSales, deleteFirm, postFirm, postStockData, putFirm };
 };
 
 export default useStockCalls;

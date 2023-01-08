@@ -17,7 +17,7 @@ const Firms = () => {
   useEffect(() => {
     getFirms();
   }, []);
-
+console.log(info)
   return (
     <Box>
       <Typography variant="h4" color="error" mb={4}>
