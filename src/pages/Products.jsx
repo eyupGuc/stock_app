@@ -40,7 +40,7 @@ const Products = () => {
   }, []);
   console.log(info);
 
-const handleSort = (arg)=>{
+const handleSortNumber = (arg)=>{
   setToggle({...toggle,[arg] : toggle[arg]*-1})
 }
 
@@ -80,7 +80,7 @@ const handleSort = (arg)=>{
                   </Box>
                 </TableCell>
                 <TableCell align="center">
-                  <Box sx={arrowStyle} onClick={()=>handleSort("stock")}>
+                  <Box sx={arrowStyle} onClick={()=>handleSortNumber("stock")}>
                     <div>Stock</div> {toggle.stock === 1 && <UpgradeIcon />}{" "}
                     {toggle.stock !== 1 && <VerticalAlignBottomIcon />}
                   </Box>
