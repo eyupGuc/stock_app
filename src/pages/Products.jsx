@@ -27,6 +27,12 @@ const Products = () => {
   // console.log(firms)
   console.log(products);
 
+  const [toggle, setToggle] = useState({
+    brand: false,
+    name: false,
+    stock: 1,
+  });
+
   useEffect(() => {
     getBrands();
     getCategories();
@@ -61,7 +67,12 @@ const Products = () => {
                   </Box>
                 </TableCell>
 
-                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">
+                  <Box sx={arrowStyle}>
+                    <div>Name</div> {true && <UpgradeIcon />}{" "}
+                    {false && <VerticalAlignBottomIcon />}
+                  </Box>
+                </TableCell>
                 <TableCell align="center">
                   <Box sx={arrowStyle}>
                     <div>Stock</div> {true && <UpgradeIcon />}{" "}
