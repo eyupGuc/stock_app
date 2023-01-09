@@ -3,7 +3,7 @@ import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import useAxios from "./useAxios";
 
-//* ------Get Calls-------
+//!---------------GET CALLS-----
 const useStockCalls = () => {
   const dispatch = useDispatch();
   const { axiosWithToken } = useAxios();
@@ -22,6 +22,9 @@ const useStockCalls = () => {
 
   const getFirms = () => getStockData("firms");
   const getSales = () => getStockData("sales");
+  const getCategories = () => getStockData("categories");
+  const getBrands = () => getStockData("brands");
+  const getProducts = () => getStockData("products");
 
   //!---------------DELETE CALLS-----
   const deleteStockData = async (url, id) => {
@@ -61,7 +64,17 @@ const useStockCalls = () => {
 
   const putFirm = (info) => putStockData(info, "firms");
 
-  return { getFirms, getSales, deleteFirm, postFirm, postStockData, putFirm };
+  return {
+    getFirms,
+    getSales,
+    getCategories,
+    getBrands,
+    getProducts,
+    deleteFirm,
+    postFirm,
+    postStockData,
+    putFirm,
+  };
 };
 
 export default useStockCalls;
