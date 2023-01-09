@@ -39,6 +39,12 @@ const Products = () => {
     getProducts();
   }, []);
   console.log(info);
+
+const handleSort = (arg)=>{
+  setToggle({...toggle,[arg] : toggle[arg]*-1})
+}
+
+
   return (
     <Box>
       <Typography variant="h4" color="error" mb={4}>
@@ -74,9 +80,9 @@ const Products = () => {
                   </Box>
                 </TableCell>
                 <TableCell align="center">
-                  <Box sx={arrowStyle}>
-                    <div>Stock</div> {true && <UpgradeIcon />}{" "}
-                    {false && <VerticalAlignBottomIcon />}
+                  <Box sx={arrowStyle} onClick={()=>handleSort("stock")}>
+                    <div>Stock</div> {toggle.stock === 1 && <UpgradeIcon />}{" "}
+                    {toggle.stock !== 1 && <VerticalAlignBottomIcon />}
                   </Box>
                 </TableCell>
                 <TableCell align="center">Operation</TableCell>
