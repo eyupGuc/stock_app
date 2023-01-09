@@ -51,7 +51,8 @@ const useStockCalls = () => {
     }
   };
   const postFirm = (info) => postStockData(info, "firms");
-  const postBrand =(info) => postStockData(info,"brands")
+  const postBrand =(info) => postStockData(info,"brands");
+  const postProduct = (info) => postStockData(info, "products");
 
   //!---------------PUT CALLS-----
 
@@ -77,6 +78,7 @@ const useStockCalls = () => {
     deleteFirm,
     postFirm,
     postStockData,
+    postProduct,
     putFirm,
     putBrand,
     postBrand,

@@ -7,7 +7,7 @@ import useStockCalls from "../hooks/useStockCalls";
 import { useState } from "react";
 
 const Firms = () => {
-  const { getFirms } = useStockCalls();
+  const { getFirms,getCategories,getProducts } = useStockCalls();
   const { firms } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
@@ -16,6 +16,8 @@ const Firms = () => {
 
   useEffect(() => {
     getFirms();
+    getCategories();
+    getProducts();
   }, []);
 console.log(info)
   return (
