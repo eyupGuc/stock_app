@@ -25,11 +25,11 @@ const Products = () => {
   const [info, setInfo] = useState({});
 
   // console.log(firms)
-  console.log(products);
+  // console.log(products);
 
   const [toggle, setToggle] = useState({
-    brand: false,
-    name: false,
+    brand: 1,
+    name: 1,
     stock: 1,
   });
 
@@ -38,13 +38,13 @@ const Products = () => {
     getCategories();
     getProducts();
   }, []);
-  console.log(info);
+  // console.log(info);
 
 const handleSortNumber = (arg)=>{
   setToggle({...toggle,[arg] : toggle[arg]*-1})
 }
 
-
+console.log(toggle)
   return (
     <Box>
       <Typography variant="h4" color="error" mb={4}>
@@ -67,7 +67,7 @@ const handleSortNumber = (arg)=>{
                 <TableCell>#</TableCell>
                 <TableCell align="center">Category</TableCell>
                 <TableCell align="center">
-                  <Box sx={arrowStyle}>
+                  <Box sx={arrowStyle} onClick={handleSortNumber("brand","text")}>
                     <div>Brand</div> {true && <UpgradeIcon />}{" "}
                     {false && <VerticalAlignBottomIcon />}
                   </Box>
