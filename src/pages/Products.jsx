@@ -40,11 +40,32 @@ const Products = () => {
   }, []);
   // console.log(info);
 
-const handleSortNumber = (arg)=>{
-  setToggle({...toggle,[arg] : toggle[arg]*-1})
-}
+  const [sortedProducts, setSortedProducts] = useState(products);
 
-console.log(toggle)
+  const handleSort = (arg, type) => {
+    setToggle({ ...toggle, [arg]: toggle[arg] * -1 });
+    setSortedProducts(
+      sortedProducts
+        ?.map((item) => item)
+        .sort((a, b) => {
+          if (type === "date") {
+            return toggle[arg] * new Date(a[arg]);
+          } else if (type === "number") {
+            return toggle[arg] * (a[arg] - b[arg]);
+          } else if (toggle[arg] === 1) {
+            return b[arg] > a[arg] ? 1 : b[arg] < a[arg] ? -1 : 0;
+          } else {
+            return a[arg] > b[arg] ? 1 : a[arg] < b[arg] ? -1 : 0;
+          }
+        })
+    );
+  };
+  //! product state'i her güncellendiğinde local state'i de güncelle.
+  useEffect(() => {
+    setSortedProducts(products);
+  }, [products]);
+
+  console.log(toggle);
   return (
     <Box>
       <Typography variant="h4" color="error" mb={4}>
@@ -67,7 +88,10 @@ console.log(toggle)
                 <TableCell>#</TableCell>
                 <TableCell align="center">Category</TableCell>
                 <TableCell align="center">
-                  <Box sx={arrowStyle} onClick={handleSortNumber("brand","text")}>
+                  <Box
+                    sx={arrowStyle}
+                    onClick={handleSortNumber("brand", "text")}
+                  >
                     <div>Brand</div> {true && <UpgradeIcon />}{" "}
                     {false && <VerticalAlignBottomIcon />}
                   </Box>
@@ -80,7 +104,10 @@ console.log(toggle)
                   </Box>
                 </TableCell>
                 <TableCell align="center">
-                  <Box sx={arrowStyle} onClick={()=>handleSortNumber("stock")}>
+                  <Box
+                    sx={arrowStyle}
+                    onClick={() => handleSortNumber("stock")}
+                  >
                     <div>Stock</div> {toggle.stock === 1 && <UpgradeIcon />}{" "}
                     {toggle.stock !== 1 && <VerticalAlignBottomIcon />}
                   </Box>
