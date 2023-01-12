@@ -49,7 +49,7 @@ const Products = () => {
         ?.map((item) => item)
         .sort((a, b) => {
           if (type === "date") {
-            return toggle[arg] * new Date(a[arg]);
+            return toggle[arg] * (new Date(a[arg]) - new Date(b[arg]));
           } else if (type === "number") {
             return toggle[arg] * (a[arg] - b[arg]);
           } else if (toggle[arg] === 1) {
@@ -90,7 +90,7 @@ const Products = () => {
                 <TableCell align="center">
                   <Box
                     sx={arrowStyle}
-                    onClick={handleSortNumber("brand", "text")}
+                    onClick={handleSort("brand", "text")}
                   >
                     <div>Brand</div> {true && <UpgradeIcon />}{" "}
                     {false && <VerticalAlignBottomIcon />}
@@ -106,7 +106,7 @@ const Products = () => {
                 <TableCell align="center">
                   <Box
                     sx={arrowStyle}
-                    onClick={() => handleSortNumber("stock")}
+                    onClick={() => handleSort("stock")}
                   >
                     <div>Stock</div> {toggle.stock === 1 && <UpgradeIcon />}{" "}
                     {toggle.stock !== 1 && <VerticalAlignBottomIcon />}
