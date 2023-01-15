@@ -10,7 +10,7 @@ const useSortColumn = (data, columnObj) => {
     setSortedData(data);
   }, [data]);
 
-  // #49 dk
+  // #1.22 dk
   const handleSort = (arg, type) => {
     setColumns({ ...columns, [arg]: columns[arg] * -1 });
     setSortedData(
