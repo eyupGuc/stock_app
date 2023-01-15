@@ -17,6 +17,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { arrowStyle, btnHoverStyle, flexCenter } from "../styles/globalStyle";
 import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
+import useSortColumn from "../hooks/useSortColumn";
 
 const Products = () => {
   const { getFirms, getBrands, getCategories, getProducts } = useStockCalls();
@@ -24,48 +25,23 @@ const Products = () => {
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
 
-  // console.log(firms)
-  // console.log(products);
-
-  const columnObj ={
+  const columnObj = {
     brand: 1,
     name: 1,
     stock: 1,
   };
+
+  const { sortedData, handleSort, columns } = useSortColumn(
+    products,
+    columnObj
+  );
 
   useEffect(() => {
     getBrands();
     getCategories();
     getProducts();
   }, []);
-  // console.log(info);
 
-  const [sortedProducts, setSortedProducts] = useState(products);
-
-  // const handleSort = (arg, type) => {
-  //   setToggle({ ...toggle, [arg]: toggle[arg] * -1 });
-  //   setSortedProducts(
-  //     sortedProducts
-  //       ?.map((item) => item)
-  //       .sort((a, b) => {
-  //         if (type === "date") {
-  //           return toggle[arg] * (new Date(a[arg]) - new Date(b[arg]));
-  //         } else if (type === "number") {
-  //           return toggle[arg] * (a[arg] - b[arg]);
-  //         } else if (toggle[arg] === 1) {
-  //           return b[arg] > a[arg] ? 1 : b[arg] < a[arg] ? -1 : 0;
-  //         } else {
-  //           return a[arg] > b[arg] ? 1 : a[arg] < b[arg] ? -1 : 0;
-  //         }
-  //       })
-  //   );
-  // };
-  //! product state'i her güncellendiğinde local state'i de güncelle.
-  // useEffect(() => {
-  //   setSortedProducts(products);
-  // }, [products]);
-
-  console.log(toggle);
   return (
     <Box>
       <Typography variant="h4" color="error" mb={4}>
@@ -88,28 +64,22 @@ const Products = () => {
                 <TableCell>#</TableCell>
                 <TableCell align="center">Category</TableCell>
                 <TableCell align="center">
-                  <Box
-                    sx={arrowStyle}
-                    onClick={handleSort("brand", "text")}
-                  >
-                    <div>Brand</div> {true && <UpgradeIcon />}{" "}
-                    {false && <VerticalAlignBottomIcon />}
+                  <Box sx={arrowStyle} onClick={handleSort("brand", "text")}>
+                    <div>Brand</div> {columns.brand === 1 && <UpgradeIcon />}{" "}
+                    {columns.brand !== 1 && <VerticalAlignBottomIcon />}
                   </Box>
                 </TableCell>
 
                 <TableCell align="center">
                   <Box sx={arrowStyle}>
-                    <div>Name</div> {true && <UpgradeIcon />}{" "}
-                    {false && <VerticalAlignBottomIcon />}
+                    <div>Name</div> {columns.name === 1 && <UpgradeIcon />}{" "}
+                    {columns.name !== 1 && <VerticalAlignBottomIcon />}
                   </Box>
                 </TableCell>
                 <TableCell align="center">
-                  <Box
-                    sx={arrowStyle}
-                    onClick={() => handleSort("stock")}
-                  >
-                    <div>Stock</div> {toggle.stock === 1 && <UpgradeIcon />}{" "}
-                    {toggle.stock !== 1 && <VerticalAlignBottomIcon />}
+                  <Box sx={arrowStyle} onClick={() => handleSort("stock")}>
+                    <div>Stock</div> {columns.stock === 1 && <UpgradeIcon />}{" "}
+                    {columns.stock !== 1 && <VerticalAlignBottomIcon />}
                   </Box>
                 </TableCell>
                 <TableCell align="center">Operation</TableCell>
