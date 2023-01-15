@@ -1,35 +1,34 @@
-import React from 'react'
+import React from "react";
 
-const useSortColumn = (data) => {
-    const [sortedProducts, setSortedProducts] = useState(data);
+const useSortColumn = (data, columnObj) => {
+  const [sortedData, setSortedData] = useState(data);
+  const [columns, setColumns] = useState(columnObj);
 
-     //! product state'i her güncellendiğinde local state'i de güncelle.
+  //! product state'i her güncellendiğinde local state'i de güncelle.
   useEffect(() => {
-    setSortedProducts(data);
+    setSortedData(data);
   }, [data]);
 
-// #49 dk
-    const handleSort = (arg, type) => {
-        setToggle({ ...toggle, [arg]: toggle[arg] * -1 });
-        setSortedProducts(
-          sortedProducts
-            ?.map((item) => item)
-            .sort((a, b) => {
-              if (type === "date") {
-                return toggle[arg] * (new Date(a[arg]) - new Date(b[arg]));
-              } else if (type === "number") {
-                return toggle[arg] * (a[arg] - b[arg]);
-              } else if (toggle[arg] === 1) {
-                return b[arg] > a[arg] ? 1 : b[arg] < a[arg] ? -1 : 0;
-              } else {
-                return a[arg] > b[arg] ? 1 : a[arg] < b[arg] ? -1 : 0;
-              }
-            })
-        );
-      };
-  return (
-    <div>useSortColumn</div>
-  )
-}
+  // #49 dk
+  const handleSort = (arg, type) => {
+    setColumns({ ...columns, [arg]: columns[arg] * -1 });
+    setSortedData(
+      sortedData
+        ?.map((item) => item)
+        .sort((a, b) => {
+          if (type === "date") {
+            return columns[arg] * (new Date(a[arg]) - new Date(b[arg]));
+          } else if (type === "number") {
+            return columns[arg] * (a[arg] - b[arg]);
+          } else if (columns[arg] === 1) {
+            return b[arg] > a[arg] ? 1 : b[arg] < a[arg] ? -1 : 0;
+          } else {
+            return a[arg] > b[arg] ? 1 : a[arg] < b[arg] ? -1 : 0;
+          }
+        })
+    );
+  };
+  return {sortedData,handleSort,columns};
+};
 
-export default useSortColumn
+export default useSortColumn;

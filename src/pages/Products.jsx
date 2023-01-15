@@ -27,11 +27,11 @@ const Products = () => {
   // console.log(firms)
   // console.log(products);
 
-  const [toggle, setToggle] = useState({
+  const columnObj ={
     brand: 1,
     name: 1,
     stock: 1,
-  });
+  };
 
   useEffect(() => {
     getBrands();
@@ -42,28 +42,28 @@ const Products = () => {
 
   const [sortedProducts, setSortedProducts] = useState(products);
 
-  const handleSort = (arg, type) => {
-    setToggle({ ...toggle, [arg]: toggle[arg] * -1 });
-    setSortedProducts(
-      sortedProducts
-        ?.map((item) => item)
-        .sort((a, b) => {
-          if (type === "date") {
-            return toggle[arg] * (new Date(a[arg]) - new Date(b[arg]));
-          } else if (type === "number") {
-            return toggle[arg] * (a[arg] - b[arg]);
-          } else if (toggle[arg] === 1) {
-            return b[arg] > a[arg] ? 1 : b[arg] < a[arg] ? -1 : 0;
-          } else {
-            return a[arg] > b[arg] ? 1 : a[arg] < b[arg] ? -1 : 0;
-          }
-        })
-    );
-  };
+  // const handleSort = (arg, type) => {
+  //   setToggle({ ...toggle, [arg]: toggle[arg] * -1 });
+  //   setSortedProducts(
+  //     sortedProducts
+  //       ?.map((item) => item)
+  //       .sort((a, b) => {
+  //         if (type === "date") {
+  //           return toggle[arg] * (new Date(a[arg]) - new Date(b[arg]));
+  //         } else if (type === "number") {
+  //           return toggle[arg] * (a[arg] - b[arg]);
+  //         } else if (toggle[arg] === 1) {
+  //           return b[arg] > a[arg] ? 1 : b[arg] < a[arg] ? -1 : 0;
+  //         } else {
+  //           return a[arg] > b[arg] ? 1 : a[arg] < b[arg] ? -1 : 0;
+  //         }
+  //       })
+  //   );
+  // };
   //! product state'i her güncellendiğinde local state'i de güncelle.
-  useEffect(() => {
-    setSortedProducts(products);
-  }, [products]);
+  // useEffect(() => {
+  //   setSortedProducts(products);
+  // }, [products]);
 
   console.log(toggle);
   return (
